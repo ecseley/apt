@@ -43,7 +43,7 @@ module.exports = function(grunt) {
         },
         files: {
           'assets/css/main.min.css': [
-            'assets/sass/app.scss'
+            'assets/sass/apt-styles.scss'
           ]
         }
       }
@@ -65,15 +65,15 @@ module.exports = function(grunt) {
     watch: {
       sass: {
         files: [
-          'assets/sass/*.scss',
+          'assets/sass/*.scss'
         ],
-        tasks: ['sass', 'version']
+        tasks: ['sass']
       },
       js: {
         files: [
           '<%= jshint.all %>'
         ],
-        tasks: ['jshint', 'uglify', 'version']
+        tasks: ['jshint', 'uglify']
       },
       livereload: {
         // Browser live reloading
@@ -103,7 +103,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-wp-version');
+  // grunt.loadNpmTasks('grunt-wp-version');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
 
   // Register tasks
@@ -112,7 +112,7 @@ module.exports = function(grunt) {
     'sass',
     'autoprefixer',
     'uglify',
-    'version',
+    // 'version',
     'imagemin'
   ]);
   grunt.registerTask('dev', [
