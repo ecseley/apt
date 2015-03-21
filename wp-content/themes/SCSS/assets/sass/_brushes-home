@@ -1,0 +1,46 @@
+// Brushes Home Page
+
+#main-content {
+	// logo
+	.header-logo {
+		display: block;
+		position: relative;
+
+		width: 50%;
+		margin: 0 auto 50px;
+		padding: 0 0 50px 0;
+
+		border-bottom: 1px solid #666;
+	}
+
+	// tagline
+	.apt-tagline {
+
+		span {
+			font-size: .5em;
+		}
+
+		h2 {
+			&:first-child {
+				display: block;
+				position: relative;
+				left: 10px;
+
+				line-height: .8;
+
+				@include animation(scale 1.0s ease-in, slide 2.0s ease);
+			}
+
+			&:nth-child(2) {
+				font-size: 2.1em;
+				font-weight: bold;
+			}
+
+			&:last-child {
+				display: block;
+				position: relative;
+				right: 12px;
+			}
+		}
+	}
+}
