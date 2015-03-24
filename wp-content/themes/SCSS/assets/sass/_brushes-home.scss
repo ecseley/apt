@@ -43,4 +43,27 @@
 			}
 		}
 	}
+	.header-tag {
+		span {
+			font-size: .5em;
+		}
+	}
+
+	.section2-blurb {
+		h2 {
+			color: #fff;
+		}
+
+		position: absolute;
+		bottom: 0px;
+		padding-bottom: 20px;
+		margin-bottom: 5px;
+		color: #fff;
+		background: rgba(0,0,0,.7);
+		transition: all 0.5s ease;
+
+		&:hover {
+			padding-bottom: 30px;
+		}
+	}
 }
