@@ -1,4 +1,8 @@
 // Brushes Home Page
+html * {
+	box-sizing: border-box;
+}
+
 
 #main-content {
 	// logo
@@ -48,22 +52,30 @@
 			font-size: .5em;
 		}
 	}
+	
+	// Blurbs
+	.blurb-container {
+		overflow: hidden;
 
-	.section2-blurb {
-		h2 {
+		.section2-blurb {
+			position: absolute;
+			bottom: 0px;
+			padding: 5px 0 20px;
+			margin-bottom: 5px;
 			color: #fff;
+			background: rgba(0,0,0,0);
+			transition: all 0.5s ease;
+			transform: translate3d(0,100%,0);
 		}
 
-		position: absolute;
-		bottom: 0px;
-		padding-bottom: 20px;
-		margin-bottom: 5px;
-		color: #fff;
-		background: rgba(0,0,0,.7);
-		transition: all 0.5s ease;
+		&:hover .section2-blurb {
+			background: rgba(0,0,0,0.7);
+			transform: translate3d(0,0,0);
+			@include animation(scale 1.0s ease-in, slide 2.0s ease);
 
-		&:hover {
-			padding-bottom: 30px;
+			h2 {
+				color: #fff;
+			}
 		}
 	}
 }
