@@ -52,6 +52,62 @@ html * {
 			font-size: .5em;
 		}
 	}
+
+	// Brush Machine Systems
+	.machine-systems {
+		padding: 0 0 50px;
+
+		div[class$='row'] {
+			padding: 0 0 30px;
+			top: -1.4em;
+		}
+
+		h1 {
+			width: 50%;
+			margin: 0 auto;
+			background-color: #0D4598;
+			padding: 15px 10px;
+			border-radius: 5px;
+			color: #fff;
+
+		}
+
+		.closed-loop-filtration {
+			i {
+				position: relative;
+				display: block;
+				margin-bottom: 3rem;
+				font-size: 4rem;
+				text-align: center;
+
+				&:before {
+					padding: .6rem .67rem;
+					background: #fff;
+					border: 2px solid #999;
+					border-radius: 50%;
+				}
+			}
+
+			h2 {
+				text-align: center;
+				color: #fff;
+			}
+
+			&:hover i:before {
+				@include keyframes(rotateIcon) {
+					from {
+						@include transform(rotate(0deg))
+					}
+					to {
+						@include transform(rotate(360deg))
+					}
+				};
+
+				@include animation(rotateIcon 1s linear);
+				@include animation-iteration-count(infinite);
+			}
+		}
+	}
 	
 	// Blurbs
 	.blurb-container {
