@@ -108,6 +108,16 @@ html * {
 			}
 		}
 	}
+
+	// About
+	.brushHome-about {
+		background-size: 80%;
+		@include background-image(url("../img/line-drawing-labeled.png"));
+		background-position: center top;
+		background-repeat: no-repeat;
+
+
+	}
 	
 	// Blurbs
 	.blurb-container {
