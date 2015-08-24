@@ -7,7 +7,7 @@
 		<?php
 			if ( have_posts() ) :
 				while ( have_posts() ) : the_post();
-					$post_format = get_post_format(); ?>
+					$post_format = et_pb_post_format(); ?>
 
 					<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
 
@@ -32,8 +32,6 @@
 								</div>',
 								$first_video
 							);
-						elseif ( 'gallery' === $post_format ) :
-							et_gallery_images();
 						elseif ( 'on' == et_get_option( 'divi_thumbnails_index', 'on' ) && '' !== $thumb  ) : ?>
 							<a href="<?php the_permalink(); ?>">
 								<?php print_thumbnail( $thumb, $thumbnail["use_timthumb"], $titletext, $width, $height ); ?>

@@ -10,3 +10,5 @@ Version: 0.1
 
 
 @import url('../Divi/style.css');
+@import 'assets/css/main.min.css';
+@import 'js/scripts.js';

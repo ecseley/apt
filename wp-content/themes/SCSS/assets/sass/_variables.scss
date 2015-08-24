@@ -1,0 +1,176 @@
+// Breakpoints
+   
+$S:     480px;   
+$M:     600px;     
+$L:     1100px;     
+
+// media queries
+
+@mixin MQ($canvas) {
+  @if $canvas == S {
+   @media only screen and (min-width: $S) { @content; } 
+  }
+  @else if $canvas == M {
+   @media only screen and (min-width: $M) { @content; } 
+  }
+  @else if $canvas == L {
+   @media only screen and (min-width: $L) { @content; } 
+  }
+}
+
+// Retina Media Query
+
+@mixin retina {
+  @media
+    only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min--moz-device-pixel-ratio: 2),
+    only screen and (-o-min-device-pixel-ratio: 2/1),
+    only screen and (min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi),
+    only screen and (min-resolution: 2dppx) {
+    @content;
+  }
+}
+
+// Anti-Aliasing mode font rendering
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Typography
+$base-font-family: $helvetica;
+$heading-font-family: $base-font-family;
+
+// Font Sizes
+$base-font-size: 1em;
+
+// Line height
+$base-line-height: 1.5;
+$heading-line-height: 1.2;
+
+// Other Sizes
+$base-border-radius: 5px;
+$base-spacing: $base-line-height * 1em;
+$small-spacing: $base-spacing / 2;
+$base-z-index: 0;
+
+
+/*---------- Colors ----------*/
+
+$blue: #2800d7;
+$light-blue: lighten($blue, 30%);
+$dark-blue: darken($blue, 30%);
+
+$black: #19191a;
+
+$red: #e12c31;
+$light-red: lighten($red, 30%);
+$dark-red: darken($red, 30%);
+
+$gray: #e6e6e6;
+$light-gray: lighten($gray, 30%);
+$dark-gray: darken($gray, 30%);
+
+$white: #fefefe;
+
+
+// Font Colors
+$base-background-color: $white;
+$base-font-color: $dark-gray;
+$action-color: $blue;
+
+// Border
+$base-border-color: $light-gray;
+$base-border: 1px solid $base-border-color;
+
+// Forms
+$form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
+$form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3);
+
+// Navigation
+$base-border-color: gainsboro !default;
+$base-border-radius: 3px !default;
+$action-color: #477DCA !default;
+
+$large-screen: em(994) !default;
+
+
+// 3D Folding Variables
+
+// Animated Grid 
+$item_width: 300px;
+$sidebar_width: 300px;
+$color_primary: $light-gray;
+$color_secondary: $white;
+$color_link: $blue;
+$anim-time: 0.5s;
+$meta_width: 280px;
+
+$socialColours:
+(
+        facebook: #3b5998,
+        twitter: #00aced,
+        google: #dd4b39,
+        linkedin: #007bb6,
+        youtube: #bb0000,
+        instagram: #517fa4,
+        pinterest: #cb2027,
+        flickr: #ff0084,
+        tumblr: #32506d,
+        forusquare: #0072b1,
+        dribbble: #ea4c89,
+        vine: #00bf8f
+);
+
+@function get-social-media-colour($colour) {
+
+  @if map-has-key($socialColours, $colour) {
+    $colour: map-get($socialColours, $colour);
+  } @else {
+    @if type-of($colour) != colour {
+      @error "Invalid colour name: `#{$colour}`.";
+    }
+  }
+
+  @return $colour;
+};
+
+.fa
+{
+  &.fa-twitter-square
+  {
+    color: get-social-media-colour(twitter);
+  }
+
+  &.fa-google-plus-square
+  {
+    color: get-social-media-colour(google);
+  }
+
+  &.fa-facebook-official
+  {
+    color: get-social-media-colour(facebook);
+  }
+
+  &.fa-linkedin-square
+  {
+    color: get-social-media-colour(linkedin);
+  }
+
+  &.fa-youtube-square
+  {
+    color: get-social-media-colour(youtube);
+  }
+};
+
+// fonts 
+
+$primary-font: 'Open Sans', sans-serif;
+$secondary-font: 'Vollkorn', serif;
+
+// animation duration
+
+$fold-animation: .5s;
+$fold-content-animation: .2s*(3+1)/2; // replace 3 with number of elements that you want to animate

@@ -45,7 +45,7 @@ if ( ! function_exists( 'et_options_stored_in_one_row' ) ){
  * @return mixed Theme option value or false if not found.
  */
 if ( ! function_exists( 'et_get_option' ) ){
-	function et_get_option( $option_name, $default_value = '', $used_for_object = '' ){
+	function et_get_option( $option_name, $default_value = '', $used_for_object = '', $force_default_value = false ){
 		global $et_theme_options, $shortname;
 
 		if ( et_options_stored_in_one_row() ){
@@ -58,7 +58,7 @@ if ( ! function_exists( 'et_get_option' ) ){
 		}
 
 		// option value might be equal to false, so check if the option is not set in the database
-		if ( ! isset ( $et_theme_options[$option_name] ) && '' != $default_value ) {
+		if ( ! isset( $et_theme_options[ $option_name ] ) && ( '' != $default_value || $force_default_value ) ) {
 			$option_value = $default_value;
 		}
 
@@ -121,16 +121,6 @@ function et_browser_body_class($classes) {
 	return $classes;
 }
 
-// Tells wp_trim_words() function to use characters instead of words
-function et_wp_trim_words_to_characters( $default_translated_text, $original_text, $context ) {
-	if ( ! is_admin() && 'words' == $original_text && 'word count: words or characters?' == $context ) {
-		return 'characters';
-	}
-
-    return $default_translated_text;
-}
-add_filter( 'gettext_with_context', 'et_wp_trim_words_to_characters', 20, 3 );
-
 /*this function allows for the auto-creation of post excerpts*/
 if ( ! function_exists( 'truncate_post' ) ){
 	function truncate_post( $amount, $echo = true, $post = '' ) {
@@ -163,11 +153,7 @@ if ( ! function_exists( 'truncate_post' ) ){
 			}
 
 			// trim text to a certain number of characters, also remove spaces from the end of a string ( space counts as a character )
-			if ( ! $echo ) {
-				$truncate = rtrim( et_wp_trim_words( $truncate, $amount, '' ) );
-			} else {
-				$truncate = rtrim( wp_trim_words( $truncate, $amount, '' ) );
-			}
+			$truncate = rtrim( et_wp_trim_words( $truncate, $amount, '' ) );
 
 			// remove the last word to make sure we display all words correctly
 			if ( '' != $echo_out ) {
@@ -206,7 +192,7 @@ if ( ! function_exists( 'et_wp_trim_words' ) ){
 			$text = implode( $sep, $words_array );
 		}
 
-		return apply_filters( 'wp_trim_words', $text, $num_words, $more, $original_text );
+		return $text;
 	}
 }
 
@@ -219,7 +205,7 @@ if ( ! function_exists( 'truncate_title' ) ){
 		if ( strlen( $truncate ) <= $amount ) $echo_out = '';
 		else $echo_out = '...';
 
-		$truncate = wp_trim_words( $truncate, $amount, '' );
+		$truncate = et_wp_trim_words( $truncate, $amount, '' );
 
 		if ( '' != $echo_out ) $truncate .= $echo_out;
 
@@ -1780,7 +1766,7 @@ function et_gf_enqueue_fonts( $et_gf_font_names ) {
 		);
 
 		$et_gf_font_name_slug = strtolower( str_replace( ' ', '-', $et_gf_font_name ) );
-		wp_enqueue_style( 'et-gf-' . $et_gf_font_name_slug, add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" ), array(), null );
+		wp_enqueue_style( 'et-gf-' . $et_gf_font_name_slug, esc_url( add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" ) ), array(), null );
 	}
 }
 endif;
